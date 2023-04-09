@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Add Checkbox to HTML",
+  "version": "1.0",
+  "description": "A Chrome extension that injects a checkbox into a specific part of the HTML",
+  "icons": {
+    "48": "icons/icon_48.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.amazon.com/*"],
+      "js": ["contentScript.js"]
+    }
+  ]
+}
