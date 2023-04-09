@@ -1,0 +1,26 @@
+on:
+  push:
+    tags:
+      - 'v*'
+  pull_request:
+
+name: Build Release
+jobs:
+        
+  Build:
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: |
+          bash release.sh ${{ github.ref }}
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: false
+          files: |
+            dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GT_Token }}
